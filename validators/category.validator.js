@@ -1,39 +1,30 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 // Validate the category data
-export function validateCategoryData(categoryData) {
+export function validateCreateCategory(categoryData) {
   const categorySchema = Joi.object({
     categoryName: Joi.string().required(),
-    description: Joi.string(),
-    disabled: Joi.boolean().default(false)
+    description: Joi.string()
   });
 
-  const { error, value } = categorySchema.validate(categoryData);
+  const { error } = categorySchema.validate(categoryData);
   if (error) {
     const errorMessage = error.details.map((detail) => detail.message).join(", ");
     throw new Error(errorMessage);
   }
-  return value;
+  return { error };
 }
 
-
-// Validate category data for update
-export function validateCategoryUpdateData(categoryData) {
+// Validate the update data
+export function validateUpdateCategory(updateData) {
   const categorySchema = Joi.object({
-    categoryName: Joi.string(),
-    description: Joi.string(),
-    disabled: Joi.boolean().default(false)
+    description: Joi.string().required()
   });
 
-  // Validate the provided data against the schema
-  const { error, value } = categorySchema.validate(categoryData);
-
-  // If there's an error, throw an exception with the error message
+  const { error } = categorySchema.validate(updateData);
   if (error) {
     const errorMessage = error.details.map((detail) => detail.message).join(", ");
     throw new Error(errorMessage);
   }
-
-  // If validation passes, return the validated data
-  return value;
+  return { error };
 }

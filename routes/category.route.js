@@ -1,21 +1,21 @@
 import express from 'express';
-import * as categoryController from '../controllers/category.controller.js'
+import * as categoryController from '../controllers/category.controller.js';
 
 const router = express.Router();
 
-// Define route for creating a new category
-router.post('/signup', categoryController.categoryInsert);
+// add category
+router.post('/', categoryController.insertCategory);
 
-// Define route for updating a category
-router.put('/update/:id', categoryController.categoryUpdate);
+// all categorys
+router.get('/', categoryController.ListCategorys);
 
-// Define route for updating a category
-router.delete('/delete/:id', categoryController.categorieDelete);
+/* show */
+router.get('/:id', categoryController.showCategory);
 
-// Define route for showing all categories
-router.get('/all', categoryController.showAllcategory);
+/* update */
+router.put('/:id', categoryController.updateCategory);
 
-// Define route for showing a specific category
-router.get('/show/:id', categoryController.showCategory);
+/* Delete */
+router.delete('/:id', categoryController.deleteCategory);
 
 export default router;

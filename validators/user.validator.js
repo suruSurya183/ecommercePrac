@@ -6,11 +6,10 @@ export function validateCreateUser(userData) {
   const userSchema = Joi.object({
   userName: Joi.string().required(),
   type: Joi.string().valid('Super-Admin', 'Admin', 'Vendor', 'Customer', 'Staff').default('Customer'),
-  contactNumber: Joi.number(),
-  location: Joi.string(),
+  contactNumber: Joi.number().required(),
+  location: Joi.string().required(),
   emailAddress: Joi.string().email().required(),
-  password: Joi.string().required(),
-  disabled: Joi.boolean().default(false)
+  password: Joi.string().required()
   });
 
 
@@ -25,9 +24,12 @@ export function validateCreateUser(userData) {
 // Validate the update data
 export function validateUpdateUser(updateData) {
   const userSchema = Joi.object({
-    userName: Joi.string(),
-    contactNumber: Joi.number(),
-    location: Joi.string(),
+    userName: Joi.string().optional(),
+  type: Joi.string().valid('Super-Admin', 'Admin', 'Vendor', 'Customer', 'Staff').default('Customer'),
+  contactNumber: Joi.number().optional(),
+  location: Joi.string().optional(),
+  emailAddress: Joi.string().email().optional(),
+  password: Joi.string().optional()
   });
   
   const { error } = userSchema.validate(updateData);

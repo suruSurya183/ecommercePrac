@@ -13,6 +13,11 @@ import indexRouter from "./routes/index.js"; // Corrected import path
 import userRouter from "./routes/user.route.js";
 import categoryRouter from "./routes/category.route.js";
 import paymentRouter from "./routes/payment.route.js";
+import productRouter from "./routes/product.route.js";
+import cartRouter from "./routes/cart.route.js";
+import orderRouter from "./routes/order.route.js";
+import refundRouter from "./routes/refund.route.js";
+import feedbackRouter from "./routes/feedback.route.js";
 
 // Get the directory name using fileURLToPath and dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -32,8 +37,11 @@ app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
 app.use("/payment", paymentRouter);
-
-
+app.use("/product", productRouter);
+app.use("/cart", cartRouter);
+app.use("/order", orderRouter);
+app.use("/refund", refundRouter);
+app.use("/feedback", feedbackRouter);
 
 mongoose.set("strictQuery", false);
 
