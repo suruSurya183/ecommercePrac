@@ -1,10 +1,10 @@
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import createError from "http-errors";
 import express from "express";
 import dotenv from "dotenv";
-import path from 'path';
-import logger from 'morgan';
+import path from "path";
+import logger from "morgan";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -12,7 +12,7 @@ dotenv.config();
 import indexRouter from "./routes/index.js"; // Corrected import path
 import userRouter from "./routes/user.route.js";
 import categoryRouter from "./routes/category.route.js";
-import productRouter from "./routes/product.route.js";
+import productRouter from "./routes/product.route.js"
 
 // Get the directory name using fileURLToPath and dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -27,10 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+// using routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
+
 
 mongoose.set("strictQuery", false);
 
