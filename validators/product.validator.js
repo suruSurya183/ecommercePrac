@@ -21,9 +21,11 @@ export function validateCreateProduct(productData) {
 // Validate the update data
 export function validateUpdateProduct(updateData) {
   const productSchema = Joi.object({
-    description: Joi.string().trim(),
-    price: Joi.number(),
-    quantityInStock: Joi.number()
+    categoryId: Joi.string().trim().optional(),
+    itemName: Joi.string().trim().optional(),
+    description: Joi.string().trim().optional(),
+    price: Joi.number().optional(),
+    quantityInStock: Joi.number().optional()
   });
 
   const { error } = productSchema.validate(updateData);

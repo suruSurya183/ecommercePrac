@@ -22,9 +22,9 @@ export function validateCreateCart(cartData) {
 export function validateUpdateCart(updateData) {
   const cartSchema = Joi.object({
     items: Joi.array().items(Joi.object({
-      productId: Joi.string().required(),
-      quantity: Joi.number().integer().min(0).default(0).required()
-    })).required()
+      productId: Joi.string().optional(),
+      quantity: Joi.number().integer().min(0).default(0).optional()
+    })).optional()
   });
 
   const { error } = cartSchema.validate(updateData);
