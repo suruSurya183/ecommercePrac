@@ -12,7 +12,7 @@ dotenv.config();
 import indexRouter from "./routes/index.js"; // Corrected import path
 import userRouter from "./routes/user.route.js";
 import categoryRouter from "./routes/category.route.js";
-import productRouter from "./routes/product.route.js"
+import paymentRouter from "./routes/payment.route.js";
 
 // Get the directory name using fileURLToPath and dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -31,7 +31,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
-app.use("/product", productRouter);
+app.use("/payment", paymentRouter);
+
 
 
 mongoose.set("strictQuery", false);
