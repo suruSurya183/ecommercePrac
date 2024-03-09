@@ -15,6 +15,7 @@ import categoryRouter from "./routes/category.route.js";
 import productRouter from "./routes/product.route.js";
 import cartRouter from "./routes/cart.route.js";
 import orderRouter from "./routes/order.route.js";
+import refundRouter from "./routes/refund.route.js";
 
 // Get the directory name using fileURLToPath and dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -35,6 +36,7 @@ app.use("/category", categoryRouter);
 app.use("/product", productRouter);
 app.use("/cart", cartRouter);
 app.use("/order", orderRouter);
+app.use("/refund", refundRouter);
 
 mongoose.set("strictQuery", false);
 
