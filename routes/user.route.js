@@ -36,4 +36,7 @@ router.post('/reset-password', authController.resetPassword);
 // Change Password
 router.post('/change-password/:id', authController.changePassword);
 
+// Search user
+router.get('/users/search', userController.searchUser);
+
 export default router;

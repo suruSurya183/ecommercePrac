@@ -29,20 +29,29 @@ export async function insertCategory(req, res) {
 };
 
 // Display List
-export async function  ListCategorys(req, res, next){
+export async function ListCategorys(req, res, next){
   try {
-    let category = await CategoryModel.find({ disabled: "false" });
-    if (!category || category.length === 0) {
-      console.log('categoryr not found');
-      return res.status(404).json({ message: 'category not found' });
+    const { categoryName } = req.query;
+    let categoryQuery = { disabled: "false" };
+
+    // If categoryName is provided, add it to the query
+    if (categoryName) {
+      categoryQuery.categoryName = categoryName;
     }
-    res.status(200).json({ message: "success", category });
+
+    let categories = await CategoryModel.find(categoryQuery);
+
+    if (!categories || categories.length === 0) {
+      console.log('Categories not found');
+      return res.status(404).json({ message: 'Categories not found' });
+    }
+
+    res.status(200).json({ message: "success", categories });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Something went wrong", error: error.message });
+    res.status(500).json({ message: "Something went wrong", error: error.message });
   }
 };
+
 
 // Display Single category
 export async function  showCategory(req, res, next){

@@ -19,11 +19,7 @@ router.get("/", productController.ListProducts);
 router.get("/:itemId", productController.showProduct);
 
 /* update */
-router.put(
-  "/:itemId",
-  upload.fields([{ name: "photos", maxCount: 10 }]),
-  productController.updateProduct
-);
+router.put("/:itemId", upload.fields([{ name: "photos", maxCount: 10 }]), productController.updateProduct);
 
 /* Delete Picture */
 router.delete("/:picturePath", productController.deletePictureInProduct);
@@ -31,16 +27,10 @@ router.delete("/:picturePath", productController.deletePictureInProduct);
 /* Delete */
 router.delete("/:itemId", productController.deleteProduct);
 
-// Search/filter products by categoryId
-router.get(
-  "/searchProductsByCategoryId/:categoryId",
-  productController.searchProductsByCategoryId
-);
-
 // Search/filter products by price range
-router.get(
-  "/searchProductsByPriceRange/:minPrice/:maxPrice",
-  productController.searchProductsByPriceRange
-);
+router.get("/searchProductsByPriceRange/:minPrice/:maxPrice", productController.searchProductsByPriceRange);
+
+/* search */
+router.get("/products/search", productController.searchItem);
 
 export default router;
