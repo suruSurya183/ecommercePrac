@@ -28,5 +28,3 @@ export function validateUpdateCategory(updateData) {
   }
   return { error };
 }
-
-

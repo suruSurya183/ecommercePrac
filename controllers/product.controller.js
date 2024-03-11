@@ -192,3 +192,32 @@ export async function searchProductsByPriceRange(req, res) {
     res.status(500).json({ message: "Something went wrong", error: error.message });
   }
 }
+
+//Search item
+export async function searchItem(req, res) {
+  try {
+    const { itemId } = req.params; // Extracting id from params
+    console.log("itemId", itemId);
+    const { itemName } = req.query; // Extracting search parameters from query string
+    console.log("itemName", itemName);
+
+    // Constructing the search query
+    const searchQuery = {};
+    if (itemId) {
+      searchQuery.itemId = itemId;
+    }
+    if (itemName) {
+      searchQuery.itemName = itemName;
+    }
+
+    const product = await ProductModel.find(searchQuery);
+
+    if (!product || product.length === 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ product });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong", error: error.message });
+  }
+}

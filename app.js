@@ -1,10 +1,10 @@
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import createError from "http-errors";
 import express from "express";
 import dotenv from "dotenv";
-import path from 'path';
-import logger from 'morgan';
+import path from "path";
+import logger from "morgan";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -12,6 +12,7 @@ dotenv.config();
 import indexRouter from "./routes/index.js"; // Corrected import path
 import userRouter from "./routes/user.route.js";
 import categoryRouter from "./routes/category.route.js";
+import paymentRouter from "./routes/payment.route.js";
 import productRouter from "./routes/product.route.js";
 import cartRouter from "./routes/cart.route.js";
 import orderRouter from "./routes/order.route.js";
@@ -31,9 +32,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+// using routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
+app.use("/payment", paymentRouter);
 app.use("/product", productRouter);
 app.use("/cart", cartRouter);
 app.use("/order", orderRouter);

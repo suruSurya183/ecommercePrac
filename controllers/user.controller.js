@@ -148,3 +148,39 @@ export async function deleteUser(req, res, next) {
       .json({ message: "Something went wrong", error: error.message });
   }
 }
+
+//Search user
+export async function searchUser(req, res) {
+  try {
+    const { id } = req.params; // Extracting id from params
+    const { emailAddress, userName, type, contactNumber } = req.query; // Extracting search parameters from query string
+
+    // Constructing the search query
+    const searchQuery = {};
+    if (id) {
+      searchQuery._id = id;
+    }
+    if (emailAddress) {
+      searchQuery.emailAddress = emailAddress;
+    }
+    if (userName) {
+      searchQuery.userName = userName;
+    }
+    if (type) {
+      searchQuery.type = type;
+    }
+    if (contactNumber) {
+      searchQuery.contactNumber = contactNumber;
+    }
+
+    const user = await UserModel.find(searchQuery);
+
+    if (!user || user.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong", error: error.message });
+  }
+}
