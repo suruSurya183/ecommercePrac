@@ -1,39 +1,33 @@
 import Card from "../models/cards.model.js";
-import {validateCard,validateCardUpdate} from "../validators/cards.validators.js"
+import { validateCard, validateCardUpdate } from "../validators/cards.validators.js"
 
 
 // Insert New card
 export async function insertCard(req, res) {
     try {
-      const cardData = req.body;
-  
-      // Validate card data before insertion
-      const { error } = validateCard(cardData);
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-  
-      // Insert card with itemId
-      const newcard = new Card(cardData);
-      const savecard = await newcard .save();
-  
-      // Send Response
-      res.status(200).json({ message: "card data inserted", data: savecard });
+        const cardData = req.body;
+
+        // Validate card data before insertion
+        const { error } = validateCard(cardData);
+        if (error) {
+            return res.status(400).json({ error: error.message });
+        }
+
+        // Insert card with itemId
+        const newcard = new Card(cardData);
+        const savecard = await newcard.save();
+
+        // Send Response
+        res.status(200).json({ message: "card data inserted", data: savecard });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: error.message || "Something went wrong",
-        });
+        return res
+            .status(500)
+            .json({
+                success: false,
+                message: error.message || "Something went wrong",
+            });
     }
-  };
-  
-
-
-
-
-
+};
 
 // Define card update function
 export async function updateCard(req, res, next) {
@@ -74,13 +68,13 @@ export async function updateCard(req, res, next) {
 };
 
 // Display Single cards
-export async function showCards(req, res, next){
+export async function showCards(req, res, next) {
     try {
         // Get cards ID from request parameters
         let cardsId = req.params.id; // Assuming the parameter is cardsId
-        
+
         // Find the card by ID
-        let cards = await Card.findOne({_id: cardsId});
+        let cards = await Card.findOne({ _id: cardsId });
 
         // Check if card exists
         if (!cards) {

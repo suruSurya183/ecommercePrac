@@ -21,12 +21,12 @@ export function validateCard(cardData) {
 
 export function validateCardUpdate(card) {
     const cardSchema = Joi.object({
-      company: Joi.string().max(100).required(),
-      cardNumber: Joi.string().max(20).required(),
-      cardOwnerName: Joi.string().max(255).required(),
-      expireDate: Joi.date().required(),
-      CVC: Joi.string().max(20).required(),
-      userid: Joi.string().required() // Assuming userid is a string
+      company: Joi.string().max(100).optional(),
+      cardNumber: Joi.string().max(20).optional(),
+      cardOwnerName: Joi.string().max(255).optional(),
+      expireDate: Joi.date().optional(),
+      CVC: Joi.string().max(20).optional(),
+      userid: Joi.string().optional() // Assuming userid is a string
     });
   
     const { error } = cardSchema.validate(card);
